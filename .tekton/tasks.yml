@@ -6,14 +6,14 @@ metadata:
 spec:
   description: This task will clean up a workspace by deleting all the files.
   workspaces:
-    - name: source
+    - name: output
   steps:
     - name: remove
       image: alpine:3
       env:
         - name: WORKSPACE_SOURCE_PATH
-          value: $(workspaces.source.path)
-      workingDir: $(workspaces.source.path)
+          value: $(workspaces.output.path)
+      workingDir: $(workspaces.output.path)
       securityContext:
         runAsNonRoot: false
         runAsUser: 0
@@ -42,7 +42,7 @@ spec:
   steps:
     - name: nosetests
       image: python:3.9-slim
-      workingDir: $(workspaces.source.path)
+      workingDir: $(workspaces.output.path)
       script: |
         #!/bin/bash
         set -e
