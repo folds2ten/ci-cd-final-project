@@ -33,7 +33,7 @@ metadata:
   name: nose
 spec:
   workspaces:
-    - name: source
+    - name: output
   params:
     - name: args
       description: Arguments to pass to nose
@@ -46,6 +46,9 @@ spec:
       script: |
         #!/bin/bash
         set -e
+        echo "📁 Working directory:"
+        ls -al
         python -m pip install --upgrade pip wheel
         pip install -r requirements.txt
         nosetests $(params.args)
+
